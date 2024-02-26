@@ -23,19 +23,28 @@ class RomanNumeral {
     }
 
     public static void solution(String num) {
-        System.out.println("run test");
+        System.out.println("ROMAN num : " + num);
         // split to get each number
+        int sum = 0;
         String[] chars = num.split("");
         for (int i = 0; i < chars.length; i++) {
             String currChar = chars[i];
-            if (i != chars.length) {
+            String nextChar = "";
+            int val = romanMap.get(currChar);
+            int nextVal = 0;
 
-                String nextChar = chars[i + 1];
-                System.out.println(currChar);
-                if (romanMap.get(currChar) < romanMap.get(nextChar)) {
+            if (i < chars.length-1) {
+                nextChar = chars[i + 1];
+                nextVal = romanMap.get(nextChar);
+            }
 
-                }
+            if(val < nextVal) {
+                sum+=(nextVal-val);
+                i++;
+            } else {
+                sum += val;
             }
         }
+        System.out.println("Sum = " + sum);
     }
 }
